@@ -2,8 +2,9 @@
  * ST7735S 128 x 160 RGB TFT driver.
  *
  * Tianmengxing display connector:
- *   SCL/SCK = PB9, SDA/MOSI = PB8, RES = PB10,
- *   DC = PB11, CS = PB14, BLK = PB26.
+ *   SCK = PB23, MOSI/PICO = PB22, MISO/POCI = PB21,
+ *   LCD_CS = PB20/SPI1_CS0, spare CS = PB27/SPI1_CS1,
+ *   RES = PB10, DC = PB11, BLK = PB14.
  *
  * The original OLED_* function names and parameters are deliberately kept so
  * existing application calls do not need to change. The y argument used by
@@ -21,9 +22,6 @@
 #endif
 #ifndef GPIO_OLED_PIN_OLED_DC_PORT
 #define GPIO_OLED_PIN_OLED_DC_PORT GPIO_OLED_PORT
-#endif
-#ifndef GPIO_OLED_PIN_OLED_CS_PORT
-#define GPIO_OLED_PIN_OLED_CS_PORT GPIO_OLED_PORT
 #endif
 #ifndef GPIO_OLED_PIN_OLED_BLK_PORT
 #define GPIO_OLED_PIN_OLED_BLK_PORT GPIO_OLED_PORT
@@ -49,8 +47,6 @@
 #define OLED_RES_Clr()  DL_GPIO_clearPins(GPIO_OLED_PIN_OLED_RES_PORT, GPIO_OLED_PIN_OLED_RES_PIN)
 #define OLED_DC_Set()   DL_GPIO_setPins(GPIO_OLED_PIN_OLED_DC_PORT, GPIO_OLED_PIN_OLED_DC_PIN)
 #define OLED_DC_Clr()   DL_GPIO_clearPins(GPIO_OLED_PIN_OLED_DC_PORT, GPIO_OLED_PIN_OLED_DC_PIN)
-#define OLED_CS_Set()   DL_GPIO_setPins(GPIO_OLED_PIN_OLED_CS_PORT, GPIO_OLED_PIN_OLED_CS_PIN)
-#define OLED_CS_Clr()   DL_GPIO_clearPins(GPIO_OLED_PIN_OLED_CS_PORT, GPIO_OLED_PIN_OLED_CS_PIN)
 #define OLED_BLK_Set()  DL_GPIO_setPins(GPIO_OLED_PIN_OLED_BLK_PORT, GPIO_OLED_PIN_OLED_BLK_PIN)
 #define OLED_BLK_Clr()  DL_GPIO_clearPins(GPIO_OLED_PIN_OLED_BLK_PORT, GPIO_OLED_PIN_OLED_BLK_PIN)
 

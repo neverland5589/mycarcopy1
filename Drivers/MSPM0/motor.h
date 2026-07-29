@@ -3,13 +3,9 @@
 
 #include "ti_msp_dl_config.h"
 
-
-
-void PWM_SetCompare0(uint16_t Compare0);
-void PWM_SetCompare1(uint16_t Compare1);
-void PWM_SetCompare2(uint16_t Compare2);
-void PWM_SetCompare3(uint16_t Compare3);
-void motor_init();
-void Motor_SetPWM(uint8_t n, int8_t PWM);
+void PWM_SetCompareA(uint16_t compare);
+void PWM_SetCompareB(uint16_t compare);
+void motor_init(void);
+void Motor_SetPWM(uint8_t motor, int8_t pwm);
 
 #endif

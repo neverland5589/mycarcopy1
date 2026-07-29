@@ -28,7 +28,6 @@ static void lcd_begin_write(uint8_t is_data)
     } else {
         OLED_DC_Clr();
     }
-    OLED_CS_Clr();
 }
 
 /* Queue one byte without releasing CS, allowing fast pixel streaming. */
@@ -42,7 +41,6 @@ static void lcd_write_stream(uint8_t value)
 static void lcd_end_write(void)
 {
     lcd_wait_idle();
-    OLED_CS_Set();
 }
 
 static void lcd_write(uint8_t value, uint8_t is_data)
@@ -309,8 +307,13 @@ void OLED_DrawBMP(uint8_t x, uint8_t y, uint8_t sizex,
 
 void OLED_Init(void)
 {
+    /*
+     * 屏幕使用SPI1_CS0（PB20）。
+     * SPI1_CS1（PB27）已经在SysConfig中配置，留给第二个SPI设备。
+     */
+    DL_SPI_setChipSelect(SPI_OLED_INST, DL_SPI_CHIP_SELECT_0);
+
     /* Keep the backlight off until the controller and display RAM are ready. */
-    OLED_CS_Set();
     OLED_DC_Set();
     OLED_BLK_Clr();
 

@@ -5,10 +5,7 @@
 #include "interrupt.h"
 
 #include "mpu6050.h"
-//#include "oled_software_i2c.h"
-// #include "oled_hardware_i2c.h"   /* ST7735S uses the SPI display driver. */
-//#include "oled_software_spi.h"
-#include "oled_hardware_spi.h"
+#include "oled_hardware_i2c.h"
 //#include "ultrasonic_capture.h"
 //#include "ultrasonic_gpio.h"
 #include "bno08x_uart_rvc.h"

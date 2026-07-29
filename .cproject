@@ -109,7 +109,7 @@
                         </toolChain>
                     </folderInfo>
                     <sourceEntries>
-                        <entry excluding="Drivers/MSPM0/GRAY.c|Drivers/Ultrasonic_GPIO|Drivers/Ultrasonic_Capture|Drivers/MPU6050|Drivers/OLED_Hardware_I2C" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="Drivers/OLED_Hardware_SPI|Drivers/Ultrasonic_GPIO|Drivers/Ultrasonic_Capture|Drivers/MPU6050" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                     </sourceEntries>
                 </configuration>
             </storageModule>
