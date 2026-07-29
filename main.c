@@ -61,7 +61,7 @@ static volatile uint8_t task2_finished = 0;
 static volatile float task2_distance = 0.0f;
 
 #define TASK2_TARGET_DISTANCE 1.75
-
+/////123343
 /*
  * 只检查中间六路灰度。
  * 中间六路至少有三路为0时，认为小车位于A点。
