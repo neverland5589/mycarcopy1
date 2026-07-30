@@ -15,7 +15,7 @@ PID_t speed_pid_B;
 volatile int status = 0;
 volatile int task = 0;
 volatile uint8_t task_confirmed = 0;
-No_MCU_Sensor sensor;
+No_MCU_Sensor sensor;//传感器参数数组
 unsigned short white[8] = {1587, 1785, 2299, 1875, 2946, 2583, 1856, 1386};
 unsigned short black[8] = {103, 107, 112, 109, 293, 130, 110, 110};
 
