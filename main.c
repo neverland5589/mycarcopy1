@@ -78,7 +78,6 @@ static uint8_t Task1_IsAtA(unsigned char Digital)
             black_count++;
         }
     }
-
     return black_count >= 3;
 }
 
@@ -111,17 +110,17 @@ static void Task1_Start(void)
 /* 每20毫秒执行一次任务1循迹和回到A点停车逻辑。 */
 static void Task1_Control(void)
 {
-    uint8_t at_a = Task1_IsAtA(Digtal);
+    uint8_t at_a = Task1_IsAtA(Digtal);//每次进入重新计算
 
-    if (!task1_running)
+    if (!task1_running)//没切换到task1
     {
-        Task1_StopMotor();
+        Task1_StopMotor();//结束
         return;
     }
 
-    if (!task1_left_start)
+    if (!task1_left_start)//如果没有判断离开A点 但是检测不到A点了 就认为已离开A点
     {
-        if (!at_a)
+        if (!at_a)//检测不到A点
         {
             task1_left_start = 1;
         }
@@ -137,7 +136,7 @@ static void Task1_Control(void)
     }
 
     task1_elapsed_time = tick_ms - task1_start_time;
-    Tracking_Update(sensor.Normal_value, Digtal);
+    Tracking_Update(sensor.Normal_value, Digtal);//获取误差更新 目标速度
     pwm_A = PID_Positional_Update(&speed_pid_A, speed_A, target_speed_A);
     pwm_B = PID_Positional_Update(&speed_pid_B, speed_B, target_speed_B);
     Motor_SetPWM(1, (int8_t)pwm_A);
@@ -322,7 +321,7 @@ static void OLED_ShowControlStatus(void)
         OLED_ShowString(0, 7, oled_buffer, 8);
     }
 }
-
+//数据分配
 static void Gray_SelectChannel(uint8_t channel)
 {
     Switch_Address_0(!(channel & 0x01U));
@@ -351,8 +350,8 @@ int main(void)
 {
     SYSCFG_DL_init();
     SysTick_Init();
-    // sudu0.Kp=1;
-    // MPU6050_Init();
+    //sudu0.Kp=1;
+    //MPU6050_Init();
     OLED_Init();
     // Ultrasonic_Init();
     BNO08X_Init();
@@ -392,7 +391,7 @@ int main(void)
     NVIC_ClearPendingIRQ(TIMER_0_INST_INT_IRQN);
     NVIC_EnableIRQ(TIMER_0_INST_INT_IRQN );
     // Motor_SetPWM(1,50);
-    float temp_value = 0.0f;
+    float temp_value = 0.0f;//串口调参临时变量
 
     while (1)
     {
@@ -417,7 +416,7 @@ int main(void)
                 task2_running = 0;
                 GrayCalibration_Confirm(gray_frame_count);
             }
-            else
+            else//任务 34
             {
                 GrayCalibration_Reset();
                 task1_running = 0;
@@ -426,7 +425,7 @@ int main(void)
             }
         }
 
-        if (task == 5)
+        if (task == 5)//校准
         {
             if (GrayCalibration_Process(&gray_frame_count, gray_frame_snapshot, white, black))
             {
@@ -531,11 +530,9 @@ void TIMER_0_INST_IRQHandler()
             }
             // Tracking_Update(sensor.Normal_value, Digtal);
 
-           
-
             Gray_StartScan();
             oled_update_count++;
-            if (oled_update_count >= 5)
+            if (oled_update_count >= 5)//100ms刷新一次
             {
                 oled_update_count = 0;
                 oled_update_request = 1;

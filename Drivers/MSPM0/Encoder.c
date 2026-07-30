@@ -64,7 +64,7 @@ void GROUP1_IRQHandler(void)
             if ((tick_ms - key1_last_time) >= 20)
             {   
                 key1_last_time = tick_ms;
-                status = status % 5 + 1;
+                status = status % 5 + 1;//按键1 1-5之间切换 
             }
             
              
@@ -73,8 +73,8 @@ void GROUP1_IRQHandler(void)
             if ((tick_ms - key2_last_time) >= 20)
             {
                 key2_last_time = tick_ms;
-                task = status;
-                task_confirmed = 1;                
+                task = status;//按键2赋值给task
+                task_confirmed = 1;//主循环读取状态改变
             }
             break;
         default:
